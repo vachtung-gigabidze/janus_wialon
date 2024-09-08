@@ -1,1 +1,3 @@
-# janus_wiallon
+# janus_wialon
+## Прокси для поступа к виалон http->https 
+## Старвй код в Ax 2009 не поддерживает https запросы
