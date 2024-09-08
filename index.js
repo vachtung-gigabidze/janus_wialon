@@ -4,9 +4,9 @@ const axios = require('axios');
 const host = '127.0.0.1';
 const port = 8000;
 
-async function login() {
+async function login(token) {
     try {        
-        const response = await axios.get('https://hst-api.org.sputnik.vision/wialon/ajax.html?svc=token/login&params={"token":"b8e4eb72dcbc30a7e004f5afa3b0a1d3135F5200E9128FDDA88516CE1B4C95DF397C5916"}');
+        const response = await axios.get(`https://hst-api.org.sputnik.vision/wialon/ajax.html?svc=token/login&params={"token":"${token}"}`);
         //console.log(response.data.eid);
         return {sid: response.data.eid};
       } catch (error) {
