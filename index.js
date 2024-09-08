@@ -14,11 +14,12 @@ async function login(token) {
       }  
 };
 
-app.get('/login', async (req, res) => {
-    const sid = await login();
+app.get('/login/:token', async (req, res) => {
+    console.log(req.params.token);
+    const token = req.params.token;
+    const sid = await login(token);
     //console.log(data);
-    res.json(sid);
-    
+    res.json(sid);    
 });
 
 app.listen(port, host, function () {
