@@ -1,13 +1,12 @@
 const app = require('express')();
 const axios = require('axios');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+require('dotenv').config();
 
-const host = '172.17.10.4';
-const port = 8000;
+const host = process.env.IP;
+const port = process.env.PORT;
 
 app.use(bodyParser.urlencoded({ extended: false }))
-
-//app.use(bodyParser.json())
 
 async function login(token) {
   try {
@@ -27,8 +26,7 @@ async function sendPost(bodyFormData) {
       data: bodyFormData,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
-    // .post(`https://hst-api.org.sputnik.vision/wialon/ajax.html`);
-    //console.log(response.data.items);
+
     return response.data;
   } catch (error) {
     return error.response.body;
@@ -39,15 +37,12 @@ app.get('/login/:token', async (req, res) => {
   console.log(req.params.token);
   const token = req.params.token;
   const sid = await login(token);
-  //console.log(data);
+
   res.send(sid);
 });
 
 app.post('/report', async function (req, res) {
-  // console.log("get");
   const items = await sendPost(req.body);
-  // console.log(items[0]);
-  // console.log("items");
   res.send(items);
 });
 
