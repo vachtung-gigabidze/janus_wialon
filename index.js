@@ -17,6 +17,15 @@ async function login(token) {
     return error.response.body;
   }
 };
+async function cbr(date) {
+  try {
+    const response = await axios.get(`https://www.cbr.ru/scripts/XML_daily.asp?date_req=${date.substring(0, 2)}/${date.substring(2, 4)}/${date.substring(4, 8)}&d=0`);
+    //console.log(response.data);
+    return response.data;
+  } catch (error) {
+    return error.response.body;
+  }
+};
 
 async function sendPost(bodyFormData) {
   try {
@@ -32,6 +41,13 @@ async function sendPost(bodyFormData) {
     return error.response.body;
   }
 };
+
+app.get('/cbr/:date', async (req, res) => {
+  console.log(req.params.date);
+  const date = req.params.date;
+  const sid = await cbr(date);
+  res.send(sid);
+});
 
 app.get('/login/:token', async (req, res) => {
   console.log(req.params.token);
