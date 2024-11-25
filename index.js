@@ -10,7 +10,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 async function login(token) {
   try {
-    const response = await axios.get(`https://hst-api.org.sputnik.vision/wialon/ajax.html?svc=token/login&params={"token":"${token}"}`);
+    const response = await axios.get(`https://gps.sputnik.vision/wialon/ajax.html?svc=token/login&params={"token":"${token}"}`);
+    // const response = await axios.get(`https://hst-api.org.sputnik.vision/wialon/ajax.html?svc=token/login&params={"token":"${token}"}`);
     //console.log(response.data.eid);
     return response.data;
   } catch (error) {
@@ -31,7 +32,8 @@ async function sendPost(bodyFormData) {
   try {
     const response = await axios({
       method: "post",
-      url: "https://hst-api.org.sputnik.vision/wialon/ajax.html",
+      url: "https://gps.sputnik.vision/wialon/ajax.html",
+      // url: "https://hst-api.org.sputnik.vision/wialon/ajax.html",
       data: bodyFormData,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     });
